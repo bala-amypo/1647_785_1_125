@@ -2,8 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.dto.ApiResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,13 +15,13 @@ public class AuthController {
     private UserRepository userRepository;
 
     @PostMapping("/register")
-    public ApiResponse register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) {
         User savedUser = userRepository.save(user);
-        return ResponseUtil.success("User registered successfully", savedUser);
+        return ResponseEntity.ok(savedUser);
     }
 
     @PostMapping("/login")
-    public ApiResponse login(@RequestBody User user) {
-        return ResponseUtil.success("Login successful");
+    public ResponseEntity<?> login(@RequestBody User user) {
+        return ResponseEntity.ok("Login successful");
     }
 }
