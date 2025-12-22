@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalRequestException{
 
     // Resource not found
     @ExceptionHandler(ResourceNotFoundException.class)
