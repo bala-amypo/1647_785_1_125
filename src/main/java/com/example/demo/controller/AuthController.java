@@ -2,8 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.util.ApiResponse;
-import com.example.demo.util.ResponseUtil;
+import com.example.demo.controller.ApiResponse;
+import com.example.demo.controller.ResponseUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
