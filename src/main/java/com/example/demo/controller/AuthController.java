@@ -1,27 +1,28 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthRequest;
-import com.example.demo.dto.RegisterRequest;
-import com.example.demo.security.JwtTokenProvider;
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.util.ApiResponse;
+import com.example.demo.util.ResponseUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    private final JwtTokenProvider jwtTokenProvider;
-
-    public AuthController(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-        return "User registered successfully";
+    public ApiResponse register(@RequestBody User user) {
+        User savedUser = userRepository.save(user);
+        return ResponseUtil.success("User registered successfully", savedUser);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody AuthRequest request) {
-        return jwtTokenProvider.generateToken(request.getEmail());
+    public ApiResponse login(@RequestBody User user) {
+        return ResponseUtil.success("Login successful");
     }
 }
