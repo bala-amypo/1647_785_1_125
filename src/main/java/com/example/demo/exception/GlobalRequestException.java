@@ -18,6 +18,6 @@ public class GlobalRequestException {
 
     @ExceptionHandler(Exception.class)
     public ApiResponse handleException(Exception ex) {
-        return new ApiResponse(false, "Internal Server Error");
+        return new  ApiResponse(false, "Internal Server Error");
     }
 }
