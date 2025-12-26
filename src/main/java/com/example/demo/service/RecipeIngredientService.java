@@ -4,7 +4,7 @@ import com.example.demo.entity.RecipeIngredient;
 
 public interface RecipeIngredientService {
 
-    RecipeIngredient addIngredientToMenuItem(RecipeIngredient ri);
+    RecipeIngredient addIngredientToMenuItem(RecipeIngredient recipeIngredient);
 
-    Double getTotalQuantityOfIngredient(Long id);
+    Double getTotalQuantityOfIngredient(Long ingredientId);
 }

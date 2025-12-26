@@ -1,7 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.RegisterRequest;
+import com.example.demo.entity.User;
 
 public interface UserService {
-    void registerUser(RegisterRequest request);
+
+    User register(RegisterRequest request);
+
+    // ✅ ADD THIS
+    User findByEmail(String email);
 }
