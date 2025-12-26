@@ -36,20 +36,16 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient getIngredientById(Long id) {
-
         return ingredientRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Ingredient not found with id: " + id));
+                        new ResourceNotFoundException(
+                                "Ingredient not found with id: " + id));
     }
 
     @Override
     public Ingredient updateIngredient(Long id, Ingredient ingredient) {
-
         Ingredient existing = getIngredientById(id);
-
-        // update only fields used in tests
         existing.setCostPerUnit(ingredient.getCostPerUnit());
-
         return ingredientRepository.save(existing);
     }
 
@@ -60,7 +56,6 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public void deactivateIngredient(Long id) {
-
         Ingredient ingredient = getIngredientById(id);
         ingredient.setActive(false);
         ingredientRepository.save(ingredient);
