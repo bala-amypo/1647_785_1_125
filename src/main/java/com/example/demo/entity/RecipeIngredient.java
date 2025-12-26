@@ -21,17 +21,11 @@ public class RecipeIngredient {
     public void setId(Long id) { this.id = id; }
 
     public MenuItem getMenuItem() { return menuItem; }
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
+    public void setMenuItem(MenuItem menuItem) { this.menuItem = menuItem; }
 
     public Ingredient getIngredient() { return ingredient; }
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
-    }
+    public void setIngredient(Ingredient ingredient) { this.ingredient = ingredient; }
 
     public double getQuantity() { return quantity; }
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
+    public void setQuantity(double quantity) { this.quantity = quantity; }
 }
