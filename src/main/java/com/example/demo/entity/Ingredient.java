@@ -1,39 +1,23 @@
-@Service
-public class ProfitCalculationServiceImpl implements ProfitCalculationService {
+package com.example.demo.entity;
 
-    private final MenuItemRepository menuItemRepository;
-    private final RecipeIngredientRepository recipeIngredientRepository;
-    private final IngredientRepository ingredientRepository;
-    private final ProfitCalculationRecordRepository recordRepository;
+import jakarta.persistence.*;
 
-    public ProfitCalculationServiceImpl(MenuItemRepository menuItemRepository,
-                                        RecipeIngredientRepository recipeIngredientRepository,
-                                        IngredientRepository ingredientRepository,
-                                        ProfitCalculationRecordRepository recordRepository) {
-        this.menuItemRepository = menuItemRepository;
-        this.recipeIngredientRepository = recipeIngredientRepository;
-        this.ingredientRepository = ingredientRepository;
-        this.recordRepository = recordRepository;
-    }
+@Entity
+public class Ingredient {
 
-    @Override
-    public ProfitCalculationRecord calculateProfit(Long menuItemId) {
-        MenuItem item = menuItemRepository.findById(menuItemId)
-                .orElseThrow(() -> new ResourceNotFoundException("Menu item not found"));
+    @Id
+    @GeneratedValue
+    private Long id;
 
-        List<RecipeIngredient> ingredients =
-                recipeIngredientRepository.findByMenuItemId(menuItemId);
+    private String name;
+    private boolean active;
 
-        if (ingredients.isEmpty()) {
-            throw new BadRequestException("No ingredients found");
-        }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-        return new ProfitCalculationRecord();
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    @Override
-    public ProfitCalculationRecord getCalculationById(Long id) {
-        return recordRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Record not found"));
-    }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
