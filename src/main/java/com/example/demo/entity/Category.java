@@ -1,8 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Category {
@@ -13,10 +13,14 @@ public class Category {
 
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany
+    @JoinTable(
+        name = "category_menuitem",
+        joinColumns = @JoinColumn(name = "category_id"),
+        inverseJoinColumns = @JoinColumn(name = "menu_item_id")
+    )
     private Set<MenuItem> menuItems = new HashSet<>();
 
-    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

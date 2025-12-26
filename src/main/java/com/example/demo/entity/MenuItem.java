@@ -2,8 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class MenuItem {
@@ -17,15 +17,9 @@ public class MenuItem {
     private BigDecimal sellingPrice;
     private boolean active = true;
 
-    @ManyToMany
-    @JoinTable(
-        name = "menuitem_category",
-        joinColumns = @JoinColumn(name = "menuitem_id"),
-        inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
+    @ManyToMany(mappedBy = "menuItems")
     private Set<Category> categories = new HashSet<>();
 
-    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
