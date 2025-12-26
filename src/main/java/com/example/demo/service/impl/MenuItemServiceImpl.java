@@ -1,28 +1,35 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.entity.MenuItem;
+import com.example.demo.repository.MenuItemRepository;
+import com.example.demo.service.MenuItemService;
+
+import org.springframework.stereotype.Service;
+import java.util.List;
+
 @Service
 public class MenuItemServiceImpl implements MenuItemService {
 
     private final MenuItemRepository repo;
 
-    public MenuItemServiceImpl(MenuItemRepository r,
-                               RecipeIngredientRepository rr,
-                               CategoryRepository cr) {
-        this.repo = r;
+    public MenuItemServiceImpl(MenuItemRepository repo) {
+        this.repo = repo;
     }
 
+    @Override
     public MenuItem createMenuItem(MenuItem item) {
-        if (item.getSellingPrice().signum() <= 0)
-            throw new BadRequestException("Invalid price");
         return repo.save(item);
     }
 
+    @Override
     public List<MenuItem> getAllMenuItems() {
         return repo.findAll();
     }
 
+    @Override
     public void deactivateMenuItem(Long id) {
-        MenuItem m = repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
-        m.setActive(false);
-        repo.save(m);
+        MenuItem item = repo.findById(id).orElseThrow();
+        item.setActive(false);
+        repo.save(item);
     }
 }
