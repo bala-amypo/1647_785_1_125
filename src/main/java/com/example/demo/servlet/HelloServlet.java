@@ -1,17 +1,24 @@
 package com.example.demo.servlet;
 
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.*;
+import jakarta.servlet.ServletException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
-        resp.getWriter().write("Hello from Servlet");
+            throws ServletException, IOException {
+
+        if (resp == null) {
+            throw new ServletException("Response is null");
+        }
+
+        resp.setContentType("text/plain");
+
+        PrintWriter writer = resp.getWriter();
+        writer.write("Hello from servlet");
+        writer.flush();
     }
 }
-
